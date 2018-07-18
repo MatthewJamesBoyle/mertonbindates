@@ -1,13 +1,13 @@
 package parser
 
 import (
-	"os"
 	"fmt"
-	"regexp"
 	"gopkg.in/headzoo/surf.v1"
+	"os"
+	"regexp"
 )
 
-func Parse(c Config) [] string {
+func Parse(c Config) map[string]string {
 
 	bow := surf.NewBrowser()
 	err := bow.Open(os.Getenv("URL"))
@@ -35,13 +35,12 @@ func Parse(c Config) [] string {
 
 	dates := getDates(result.Text())
 
-	fmt.Println("Next Communal Rubbish will be picked up on: " + dates[0][0])
-	fmt.Println("Next Communal Recycling will be picked up on: " + dates[1][0])
-	fmt.Println("Next Communal Food Waste will be picked up on: " + dates[2][0])
-
-	return [] string{""}
+	return map[string]string{
+		"rubbish":   dates[0][0],
+		"recycling": dates[1][0],
+		"food":      dates[2][0],
+	}
 }
-
 
 func getDates(s string) [][]string {
 	re := regexp.MustCompile(`\d{2}/\d{2}/\d{4}`)
