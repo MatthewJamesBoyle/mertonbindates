@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/headzoo/surf"
 	"os"
 	"regexp"
 	"github.com/joho/godotenv"
 	"log"
+	"gopkg.in/headzoo/surf.v1"
 )
 
 func main() {
